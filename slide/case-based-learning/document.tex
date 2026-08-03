@@ -7,6 +7,8 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning}
 
+\usepackage[indonesian]{babel}
+
 % ==========================================
 % KUSTOMISASI WARNA RESMI ITS SURABAYA
 % ==========================================
@@ -58,12 +60,12 @@
 % ==========================================
 % METADATA DOSEN & MATAKULIAH
 % ==========================================
-\title[My Research Journey]{My Research Journey}
-\subtitle{2010-2026}
+\title[Case-Based Learning]{Pembelajaran Berbasis Kasus (Case-Based Learning) di Perguruan Tinggi}
+\subtitle{Transformasi Pembelajaran Matematika dan Komputasi Berorientasi Pemecahan Masalah}
 \author[Dieky Adzkiya]{Dieky Adzkiya}
 \institute[ITS]{
-	Department of Mathematics \\
-	Faculty of Science and Data Analytics \\
+	Departemen Matematika \\
+	Fakultas Sains dan Analitika Data \\
 	Institut Teknologi Sepuluh Nopember
 }
 \date{\today}
@@ -93,10 +95,219 @@
 	\end{frame}
 	
 	% 2. Slide Daftar Isi (Table of Contents)
-	\begin{frame}{Overview}
+	\begin{frame}{Agenda}
 		\tableofcontents
 	\end{frame}
-	
-	\section{Finite Abstractions of Max-Plus-Linear Systems}
-	
+
+% ---------------------------------------------------
+\section{Paradigma \& Urgensi}
+% ---------------------------------------------------
+
+% SLIDE 2
+\begin{frame}{Mengapa Kita Berada di Sini?}
+    \begin{itemize}
+        \item \textbf{Tuntutan Kurikulum \& IKU 7:}\\
+        Kriteria Indikator Kinerja Utama perguruan tinggi mensyaratkan bobot evaluasi berbasis kasus/proyek $\ge 50\%$.
+        \vspace{0.3cm}
+        \item \textbf{Tantangan Pembelajaran Matematika:}
+        \begin{itemize}
+            \item Seringkali didominasi oleh metode ceramah dan derivasi teoretis yang kaku.
+            \item Mahasiswa kerap bertanya: \textit{``Untuk apa materi ini di dunia nyata?''}
+        \end{itemize}
+        \vspace{0.3cm}
+        \item \textbf{Solusi:}\\
+        Menjembatani teori abstrak dengan fenomena nyata melalui \textbf{Case-Based Method (CBM)}.
+    \end{itemize}
+\end{frame}
+
+% SLIDE 3
+\begin{frame}{Apa itu Case-Based Method (CBM)?}
+    \textbf{Definisi:}\\
+    Pendekatan pembelajaran aktif di mana mahasiswa belajar melalui analisis, diskusi, dan penyelesaian masalah dari kasus yang kontekstual.
+    
+    \vspace{0.5cm}
+    \textbf{Pergeseran Paradigma:}
+    \begin{itemize}
+        \item \textbf{Dosen:} Dari \textit{Content Provider} (Penceramah) $\rightarrow$ \textit{Facilitator \& Coach} (Fasilitator/Pembimbing).
+        \item \textbf{Mahasiswa:} Dari \textit{Passive Receiver} (Penerima Pasif) $\rightarrow$ \textit{Active Problem Solver} (Pemecah Masalah Aktif).
+    \end{itemize}
+\end{frame}
+
+% SLIDE 4
+\begin{frame}{Anatomy of a ``Good Math Case''}
+    Apa yang membuat sebuah studi kasus matematika menjadi ideal?
+    \vspace{0.3cm}
+    \begin{itemize}
+        \item \textbf{Kontekstual \& Realistis:}\\ Mengangkat fenomena nyata dari industri, sains, data riil, atau sistem komputasi.
+        \vspace{0.2cm}
+        \item \textbf{Terbuka (Open-ended):}\\ Tidak selalu memiliki satu jawaban mutlak. Memungkinkan berbagai variasi pemodelan, asumsi, atau strategi penyelesaian.
+        \vspace{0.2cm}
+        \item \textbf{Mendorong Penalaran Berjenjang:}\\ Menuntut mahasiswa melakukan eksplorasi data, pembentukan model matematis, komputasi, hingga interpretasi hasil.
+    \end{itemize}
+\end{frame}
+
+% ---------------------------------------------------
+\section{Desain \& Integrasi Strategis}
+% ---------------------------------------------------
+
+% SLIDE 5
+\begin{frame}{Kerangka Kerja 4 Tahap CBM Matematika}
+    \begin{block}{Alur Penyelesaian Masalah}
+        \centering
+        [1. Problem \& Data] $\rightarrow$ [2. Formulation/Model] $\rightarrow$ [3. Solving/Verifying] $\rightarrow$ [4. Interpretation]
+    \end{block}
+    \vspace{0.3cm}
+    \begin{enumerate}
+        \item \textbf{Identifikasi Masalah \& Batasan Sistem:}\\ Memahami fenomena fisis/bisnis dan menetapkan parameter/variabel.
+        \item \textbf{Formulasi Formal \& Spesifikasi:}\\ Mentransformasikan masalah naratif menjadi model matematika, logika, atau komputasi.
+        \item \textbf{Penyelesaian \& Eksekusi Komputasi:}\\ Menggunakan metode analitik, numerik, algoritma, atau \textit{tools} perangkat lunak.
+        \item \textbf{Interpretasi \& Evaluasi:}\\ Menerjemahkan hasil matematis kembali ke rekomendasi praktis di domain aplikasi nyata.
+    \end{enumerate}
+\end{frame}
+
+% SLIDE 6
+\begin{frame}{Contoh Konkret Implementasi CBM}
+    \textbf{Contoh 1: Verifikasi Sistem / Formal Methods}
+    \begin{itemize}
+        \item \textit{Kasus:} Analisis kegagalan/kebocoran sistem keselamatan pada simulasi pengontrol lalu lintas udara (\textit{traffic controller}).
+        \item \textit{Alur:} Model \textit{timed automata} $\rightarrow$ Formulasi logika LTL/CTL $\rightarrow$ Verifikasi via SPIN/UPPAAL $\rightarrow$ Analisis \textit{counterexample}.
+    \end{itemize}
+    \vspace{0.4cm}
+    \textbf{Contoh 2: Pemodelan / Optimasi Sistem}
+    \begin{itemize}
+        \item \textit{Kasus:} Keterlambatan jadwal penerbangan berantai di suatu bandara.
+        \item \textit{Alur:} Identifikasi lintasan kritis $\rightarrow$ Formulasi aljabar Max-Plus $\rightarrow$ Perhitungan \textit{eigenvalue/eigenvector} $\rightarrow$ Rekomendasi penjadwalan ulang.
+    \end{itemize}
+\end{frame}
+
+% SLIDE 7
+\begin{frame}{Menyusun Skenario Kasus dari Bahan Ajar Murni}
+    \textit{Bagaimana mengubah Soal Ujian Konvensional menjadi Kasus CBM?}
+    \vspace{0.4cm}
+    \begin{exampleblock}{Sebelum (Soal Konvensional)}
+        ``Buktikan teorema X dan selesaikan persamaan diferensial berikut berdasarkan nilai awal yang diberikan!''
+    \end{exampleblock}
+    \vspace{0.2cm}
+    \begin{alertblock}{Sesudah (Skenario CBM)}
+        ``Sebuah perusahaan teknologi mengalami penurunan performa jaringan transmisi sebesar 20\%. Berdasarkan data anomali berikut, identifikasilah parameter sistemnya, bangun model matematis, dan usulkan solusi optimasi dengan mempertahankan syarat batas kestabilan jaringan.''
+    \end{alertblock}
+\end{frame}
+
+% SLIDE 8
+\begin{frame}{Merancang Asesmen \& Rubrik Penilaian}
+    \textbf{Prinsip Asesmen CBM:}\\ 
+    Evaluasi tidak hanya berfokus pada hasil akhir (produk), tetapi sangat menghargai alur berpikir (proses).
+    
+    \vspace{0.4cm}
+    \textbf{Rekomendasi Komponen Evaluasi (Memenuhi IKU 7):}
+    \begin{itemize}
+        \item \textbf{15\%} - Partisipasi Diskusi \& Kerja Kelompok (\textit{Soft skills})
+        \item \textbf{25\%} - Formulasi \& Pembentukan Model Matematika
+        \item \textbf{25\%} - Eksekusi, Komputasi, \& Solusi Teknis
+        \item \textbf{35\%} - Laporan Akhir, Interpretasi Hasil, \& Presentasi
+    \end{itemize}
+    \vspace{0.2cm}
+    \textit{*Total porsi berbasis kasus wajib $\ge 50\%$ dari nilai akhir MK.}
+\end{frame}
+
+% ---------------------------------------------------
+\section{Mini Workshop \& Simulasi}
+% ---------------------------------------------------
+
+% SLIDE 9
+\begin{frame}{Instruksi Mini-Workshop (Hands-On 45 Menit)}
+    Mari kita berlatih merancang kasus untuk kelas Anda!
+    \vspace{0.4cm}
+    
+    \textbf{Tugas Berkelompok (Per Rumpun Mata Kuliah / RMK):}
+    \begin{enumerate}
+        \item Pilih \textbf{1 mata kuliah} (misal: Aljabar, Analisis, Graf, atau Komputasi).
+        \item Tentukan \textbf{1 topik utama} di pertengahan/akhir semester.
+        \item Konversikan topik teoretis tersebut menjadi \textbf{1 narasi singkat skenario kasus} kontekstual.
+        \item Rancang \textbf{4 tahapan alur penyelesaian} (Model $\rightarrow$ Formulasi $\rightarrow$ Komputasi $\rightarrow$ Interpretasi) yang harus dikerjakan mahasiswa.
+    \end{enumerate}
+\end{frame}
+
+% SLIDE 10
+\begin{frame}{Worksheet Pelatihan (Live Draft)}
+    \begin{block}{Silakan Diskusikan \& Tulis di Kertas Kerja}
+        \begin{itemize}
+            \item \textbf{Nama Mata Kuliah:} ..............................................................
+            \item \textbf{Topik Teoretis/Spesifik:} .....................................................
+            \item \textbf{Judul Skenario Kasus:} ......................................................
+            \vspace{0.2cm}
+            \item \textbf{Alur Penyelesaian Mahasiswa:}
+            \begin{itemize}
+                \item \textit{Tahap 1 (Model \& Data):} .........................................
+                \item \textit{Tahap 2 (Spesifikasi/Formulasi):} ...............................
+                \item \textit{Tahap 3 (Komputasi/Solving):} ...................................
+                \item \textit{Tahap 4 (Interpretasi/Presentasi):} .............................
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% SLIDE 11
+\begin{frame}{Presentasi Hasil Mini-Workshop}
+    \centering
+    \Large \textbf{Sesi Berbagi \& Umpan Balik}
+    
+    \vspace{0.5cm}
+    \normalsize
+    \begin{itemize}
+        \item 2--3 Perwakilan kelompok akan mempresentasikan draf narasi kasus selama 5 menit.
+        \item Kita akan melakukan \textit{peer-review} dan memberikan masukan terkait tingkat kesulitan (\textit{complexity}) dan kelayakan kasus.
+    \end{itemize}
+\end{frame}
+
+% ---------------------------------------------------
+\section{Diskusi \& Wrap-Up}
+% ---------------------------------------------------
+
+% SLIDE 12
+\begin{frame}{Tantangan Umum Implementasi \& Solusinya}
+    \begin{table}[]
+        \centering
+        \renewcommand{\arraystretch}{1.5}
+        \begin{tabular}{p{5cm} | p{8cm}}
+            \toprule
+            \textbf{Tantangan} & \textbf{Solusi Praktis} \\
+            \midrule
+            Mahasiswa pasif / terbiasa menunggu instruksi dosen & Berikan \textit{scaffolding} / panduan pertanyaan pemantik (\textit{guiding questions}) secara bertahap.\\
+            \hline
+            Kesulitan mencari kasus riil di matakuliah murni/abstrak & Gunakan studi kasus simulasi terkomputerisasi, komparasi kinerja 2 metode, atau replikasi artikel jurnal.\\
+            \hline
+            Ukuran kelas terlalu besar ($>$40 Mhs) & Terapkan \textit{Small Group Discussion} dan evaluasi berbasis portofolio rubrik kelompok.\\
+            \bottomrule
+        \end{tabular}
+    \end{table}
+\end{frame}
+
+% SLIDE 13
+\begin{frame}{Tanya Jawab \& Brainstorming}
+    \centering
+    \Large \textbf{Q \& A}
+    
+    \vspace{0.5cm}
+    \normalsize
+    Bagaimana kesiapan kurikulum di Departemen Matematika Undip?\\
+    Apakah ada kendala spesifik pada mata kuliah Bapak/Ibu?
+\end{frame}
+
+% SLIDE 14
+\begin{frame}{Penutup Sesi Pagi \& Pengantar Sesi Siang}
+    \begin{itemize}
+        \item \textbf{Pesan Kunci:}\\
+        \textit{Case-Based Method} bukan berarti membuang teori fundamental matematika. Sebaliknya, metode ini \textbf{memberikan makna dan konteks} mengapa teori tersebut penting untuk dipelajari.
+        
+        \vspace{0.5cm}
+        \item \textbf{Agenda Sesi Siang (Mulai Pkl 13.00):} \\
+        \textit{Working Session} -- Kita akan langsung membuka \textit{file} RPS (Rencana Pembelajaran Semester) Bapak/Ibu dan menyusun/memperbarui drafnya agar terstandarisasi CBL dan IKU 7.
+    \end{itemize}
+    
+    \vspace{0.5cm}
+    \centering
+    \textbf{Terima Kasih, Selamat Beristirahat!}
+\end{frame}
+
 \end{document}
