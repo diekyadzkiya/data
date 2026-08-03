@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  NAMA_FOLDER: 'slide/my-research-journey' # Jalur folder lengkap untuk masuk
+  NAMA_FOLDER: 'slide/case-based-learning' # Jalur folder lengkap untuk masuk
   NAMA_FILE: 'document'                     # Cukup nama file saja (tanpa nama folder)
 
 jobs:
