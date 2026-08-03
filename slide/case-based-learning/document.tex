@@ -60,8 +60,8 @@
 % ==========================================
 % METADATA DOSEN & MATAKULIAH
 % ==========================================
-\title[Case-Based Learning]{Pembelajaran Berbasis Kasus (Case-Based Learning) di Perguruan Tinggi}
-\subtitle{Transformasi Pembelajaran Matematika dan Komputasi Berorientasi Pemecahan Masalah}
+\title[\textit{Case-Based Learning}]{Pembelajaran Berbasis Kasus (\textit{Case-Based} Learning) di Perguruan Tinggi}
+\subtitle{Transformasi Pembelajaran Matematika Berorientasi Pemecahan Masalah}
 \author[Dieky Adzkiya]{Dieky Adzkiya}
 \institute[ITS]{
 	Departemen Matematika \\
@@ -116,12 +116,15 @@
         \end{itemize}
         \vspace{0.3cm}
         \item \textbf{Solusi:}\\
-        Menjembatani teori abstrak dengan fenomena nyata melalui \textbf{Case-Based Method (CBM)}.
+        Menjembatani teori abstrak dengan fenomena nyata melalui \textbf{\textit{Case-Based Method (CBM)}}.
     \end{itemize}
+
+Apa itu \textit{Case-Based Method} (CBM)?
+	
 \end{frame}
 
 % SLIDE 3
-\begin{frame}{Apa itu Case-Based Method (CBM)?}
+\begin{frame}{Apa itu \textit{Case-Based Method} (CBM)?}
     \textbf{Definisi:}\\
     Pendekatan pembelajaran aktif di mana mahasiswa belajar melalui analisis, diskusi, dan penyelesaian masalah dari kasus yang kontekstual.
     
@@ -131,6 +134,9 @@
         \item \textbf{Dosen:} Dari \textit{Content Provider} (Penceramah) $\rightarrow$ \textit{Facilitator \& Coach} (Fasilitator/Pembimbing).
         \item \textbf{Mahasiswa:} Dari \textit{Passive Receiver} (Penerima Pasif) $\rightarrow$ \textit{Active Problem Solver} (Pemecah Masalah Aktif).
     \end{itemize}
+
+Studi kasus apa yang ideal?
+	
 \end{frame}
 
 % SLIDE 4
@@ -140,7 +146,7 @@
     \begin{itemize}
         \item \textbf{Kontekstual \& Realistis:}\\ Mengangkat fenomena nyata dari industri, sains, data riil, atau sistem komputasi.
         \vspace{0.2cm}
-        \item \textbf{Terbuka (Open-ended):}\\ Tidak selalu memiliki satu jawaban mutlak. Memungkinkan berbagai variasi pemodelan, asumsi, atau strategi penyelesaian.
+        \item \textbf{Terbuka (\textit{Open-ended}):}\\ Tidak selalu memiliki satu jawaban mutlak. Memungkinkan berbagai variasi pemodelan, asumsi, atau strategi penyelesaian.
         \vspace{0.2cm}
         \item \textbf{Mendorong Penalaran Berjenjang:}\\ Menuntut mahasiswa melakukan eksplorasi data, pembentukan model matematis, komputasi, hingga interpretasi hasil.
     \end{itemize}
@@ -165,19 +171,110 @@
     \end{enumerate}
 \end{frame}
 
-% SLIDE 6
-\begin{frame}{Contoh Konkret Implementasi CBM}
-    \textbf{Contoh 1: Verifikasi Sistem / Formal Methods}
-    \begin{itemize}
-        \item \textit{Kasus:} Analisis kegagalan/kebocoran sistem keselamatan pada simulasi pengontrol lalu lintas udara (\textit{traffic controller}).
-        \item \textit{Alur:} Model \textit{timed automata} $\rightarrow$ Formulasi logika LTL/CTL $\rightarrow$ Verifikasi via SPIN/UPPAAL $\rightarrow$ Analisis \textit{counterexample}.
-    \end{itemize}
-    \vspace{0.4cm}
-    \textbf{Contoh 2: Pemodelan / Optimasi Sistem}
-    \begin{itemize}
-        \item \textit{Kasus:} Keterlambatan jadwal penerbangan berantai di suatu bandara.
-        \item \textit{Alur:} Identifikasi lintasan kritis $\rightarrow$ Formulasi aljabar Max-Plus $\rightarrow$ Perhitungan \textit{eigenvalue/eigenvector} $\rightarrow$ Rekomendasi penjadwalan ulang.
-    \end{itemize}
+% ---------------------------------------------------
+% CONTOH KASUS CBM PADA MATA KULIAH WAJIB MATEMATIKA
+% ---------------------------------------------------
+
+% Slide 6a: Klaster Matematika Dasar (Kalkulus 1, 2, Peubah Banyak, Vektor)
+\begin{frame}{Slide 6a: Contoh CBM – Klaster Matematika Dasar}
+    \begin{block}{1. Kalkulus 1 \& Kalkulus 2}
+        \begin{itemize}
+            \item \textbf{Skenario Kasus:} Efisiensi kapasitas tampung waduk dan laju erosi tanah.
+            \item \textbf{Alur Kasus:} Analisis data laju debit air masuk/keluar $\rightarrow$ Menentukan fungsi Laju \& Luas Penampang $\rightarrow$ Menghitung nilai ekstrem (optimasi) dan akumulasi volume air dengan Integral $\rightarrow$ Menyusun skenario waktu puncak banjir.
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{2. Kalkulus Peubah Banyak \& Analisis Vektor}
+        \begin{itemize}
+            \item \textbf{Skenario Kasus:} Pemetaan potensi energi angin di wilayah pesisir.
+            \item \textbf{Alur Kasus:} Analisis data medan vektor kecepatan angin $\rightarrow$ Menghitung \textit{gradient}, \textit{divergence}, dan \textit{curl} $\rightarrow$ Menggunakan Teorema Stokes/Green untuk fluks energi $\rightarrow$ Menginterpretasikan lokasi optimal kincir angin.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% Slide 6b: Klaster Aljabar (Aljabar Linier Elem., Aljabar I \& II, Aljabar Linier)
+\begin{frame}{Slide 6b: Contoh CBM – Klaster Aljabar}
+    \begin{block}{3. Aljabar Linier Elementer \& Aljabar Linier}
+        \begin{itemize}
+            \item \textbf{Skenario Kasus:} Pemeringkatan dokumen/laman web (\textit{PageRank}) atau Model Input-Output Ekonomis Leontief.
+            \item \textbf{Alur Kasus:} Analisis keterhubungan antar-sektor/laman $\rightarrow$ Membentuk matriks stokastik \& sistem persamaan linier $\rightarrow$ Menghitung \textit{eigenvalue} \& \textit{eigenvector} dominan $\rightarrow$ Menyusun ranking stabilitas sistem.
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{4. Aljabar I \& Aljabar II (Struktur Aljabar)}
+        \begin{itemize}
+            \item \textbf{Skenario Kasus:} Keamanan enkripsi pesan digital (Kriptografi RSA / Kurva Eliptik).
+            \item \textbf{Alur Kasus:} Membedah struktur Grup/Ring modulo $n$ $\rightarrow$ Menguji sifat koset dan Isomorfisma $\rightarrow$ Menganalisis ketahanan kunci enkripsi berbasis sifat teoretis aljabar.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% Slide 6c: Klaster Analisis (Analisis I \& II, Logika Mat., Fungsi Peubah Kompleks)
+\begin{frame}{Slide 6c: Contoh CBM – Klaster Analisis \& Logika Matematika}
+    \begin{block}{5. Logika Matematika \& Matematika Diskrit}
+        \begin{itemize}
+            \item \textbf{Skenario Kasus:} Verifikasi logika sirkuit digital / ekspresi boolean logika perbankan.
+            \item \textbf{Alur Kasus:} Identifikasi \textit{requirement} sistem $\rightarrow$ Formulasi proposisi \& inferensi logika $\rightarrow$ Membuktikan validitas penalaran / kebebasan kontradiksi.
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{6. Analisis I, Analisis II, \& Fungsi Peubah Kompleks}
+        \begin{itemize}
+            \item \textbf{Skenario Kasus:} Analisis kegagalan konvergensi pada algoritma pemrosesan sinyal.
+            \item \textbf{Alur Kasus:} Membedah algoritma yang mengalami \textit{breakdown} $\rightarrow$ Menguji ketatnya ($\epsilon$-$\delta$) kekontinuan seragam / keanalitikan fungsi kompleks $\rightarrow$ Rekonstruksi pembuktian teoretis agar algoritma valid kembali.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% Slide 6d: Klaster Komputasi & Pemrograman (Alpro 1 \& 2, Metnum, Tek. Simulasi)
+\begin{frame}{Slide 6d: Contoh CBM – Klaster Komputasi \& Metode Numerik}
+    \begin{block}{7. Algoritma \& Pemrograman Komputer 1 \& 2}
+        \begin{itemize}
+            \item \textbf{Skenario Kasus:} Desain sistem antrean dan ekstraksi data pasien di RS.
+            \item \textbf{Alur Kasus:} Membedah kebutuhan struktur data (Array, Linked List, Sorting) $\rightarrow$ Merancang algoritma modular $\rightarrow$ Menguji \textit{time/space complexity} program.
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{8. Metode Numerik \& Teknik Simulasi}
+        \begin{itemize}
+            \item \textbf{Skenario Kasus:} Galat pencocokan posisi GPS atau Simulasi Monte Carlo risiko investasi.
+            \item \textbf{Alur Kasus:} Input data acak/sinyal $\rightarrow$ Eksplorasi interpolasi numerik \& propagasi galat (\textit{truncation error}) $\rightarrow$ Menentukan metode paling efisien dan konvergen.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% Slide 6e: Klaster Persamaan Diferensial & Pemodelan (PDB, PDP, Pemodelan, Mat. Sistem)
+\begin{frame}{Slide 6e: Contoh CBM – Klaster Persamaan Diferensial \& Pemodelan}
+    \begin{block}{9. Persamaan Diferensial Biasa (PDB) \& Pemodelan Matematika}
+        \begin{itemize}
+            \item \textbf{Skenario Kasus:} Dinamika penyebaran penyakit menular (Model SIR) atau interaksi predator-mangsa.
+            \item \textbf{Alur Kasus:} Observasi laju infeksi $\rightarrow$ Menyusun sistem PDB non-linear $\rightarrow$ Analisis titik kesetimbangan (\textit{equilibrium}) \& kestabilan $\rightarrow$ Rekomendasi kebijakan intervensi.
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{10. Persamaan Diferensial Parsial (PDP) \& Matematika Sistem}
+        \begin{itemize}
+            \item \textbf{Skenario Kasus:} Penyebaran polutan/panas pada pelat komponen mesin industri.
+            \item \textbf{Alur Kasus:} Penentuan syarat batas/awal $\rightarrow$ Membentuk Persamaan Panas/Difusi $\rightarrow$ Menyelesaikan via Separasi Variabel / Deret Fourier $\rightarrow$ Interpretasi profil suhu/zat.
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+% Slide 6f: Klaster Statistika & Riset Operasi (Metstat, Teori Peluang, Matstat, RO I)
+\begin{frame}{Slide 6f: Contoh CBM – Klaster Probabilitas, Statistika, \& Riset Operasi}
+    \begin{block}{11. Teori Peluang, Metode Statistika, \& Matematika Statistika}
+        \begin{itemize}
+            \item \textbf{Skenario Kasus:} Pengujian klaim efektivitas vaksin baru atau analisis risiko klaim asuransi.
+            \item \textbf{Alur Kasus:} Eksplorasi data sampel $\rightarrow$ Menentukan distribusi peluang \& estimator terbaik (MLE/UMVU) $\rightarrow$ Pengujian Hipotesis $\rightarrow$ Penarikan kesimpulan keputusan bisnis/medis.
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{12. Riset Operasi I}
+        \begin{itemize}
+            \item \textbf{Skenario Kasus:} Optimasi rute distribusi logistik bahan pokok nasional.
+            \item \textbf{Alur Kasus:} Analisis kapasitas \& permintaan $\rightarrow$ Membentuk model Pemrograman Linier / Transportasi $\rightarrow$ Penyelesaian dengan Algoritma Simplex $\rightarrow$ Analisis sensitivitas biaya.
+        \end{itemize}
+    \end{block}
 \end{frame}
 
 % SLIDE 7
