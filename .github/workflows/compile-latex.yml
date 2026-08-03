@@ -1,0 +1,29 @@
+name: Kompilasi LaTeX Proyek Tetap
+
+on:
+  workflow_dispatch:
+
+env:
+  NAMA_FOLDER: 'slide/my-research-journey' # Jalur folder lengkap untuk masuk
+  NAMA_FILE: 'document'                     # Cukup nama file saja (tanpa nama folder)
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ambil Kode dari Repositori
+        uses: actions/checkout@v4
+
+      - name: Kompilasi Dokumen LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          # Cukup panggil nama berkasnya langsung karena sudah berada di dalam working_directory
+          root_file: ${{ env.NAMA_FILE }}.tex
+          working_directory: ${{ env.NAMA_FOLDER }}
+
+      - name: Simpan Hasil PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: PDF-Hasil-Kompilasi
+          # Untuk penyimpanan PDF, tetap gunakan jalur lengkap agar sistem GitHub bisa menemukannya
+          path: ${{ env.NAMA_FOLDER }}/${{ env.NAMA_FILE }}.pdf
