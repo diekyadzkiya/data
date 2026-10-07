@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 env:
-  NAMA_FOLDER: 'slide/case-based-learning' # Jalur folder lengkap untuk masuk
-  NAMA_FILE: 'document'                     # Cukup nama file saja (tanpa nama folder)
+  NAMA_FOLDER: 'slide/quantum-algorithms-via-linear-algebra' # Jalur folder lengkap untuk masuk
+  NAMA_FILE: '01-introduction' # Cukup nama file saja (tanpa nama folder dan ekstensi tex)
 
 jobs:
   build_latex:
