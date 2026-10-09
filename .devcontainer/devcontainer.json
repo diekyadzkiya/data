@@ -1,0 +1,15 @@
+{
+  "name": "SageMath Environment",
+  "image": "sagemath/sagemath:latest",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+      ]
+    }
+  }
+}
