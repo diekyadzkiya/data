@@ -7,5 +7,5 @@
       "configureZshAsDefaultShell": true
     }
   },
-  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y curl && curl -fsSL https://raw.githubusercontent.com/dreal/dreal4/master/setup/ubuntu/22.04/install.sh | sudo bash"
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y curl && curl -fsSL https://raw.githubusercontent.com/dreal/dreal4/master/setup/ubuntu/22.04/install.sh | sudo bash && sudo apt-get install pip && pip install dreal --upgrade"
 }
