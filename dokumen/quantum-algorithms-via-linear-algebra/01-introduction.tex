@@ -176,7 +176,7 @@
 % 3
 \begin{frame}{The model: the space and the states}
     \begin{itemize}
-		\item The state is described by a single unit vector $\mathbf{a} = \begin{bmatrix} a_0 & \dots & a_{N-1}\end{bmatrix}^T$ that lies in some fixed vector space of dimension $N = 2^n$, for some $n$, where each entry $a_k$ is a real or complex number
+		\item The state is described by a single unit vector $\mathbf{a} = \begin{bmatrix} a_0 & \dots & a_{N-1} \end{bmatrix}^T$ that lies in some fixed vector space of dimension $N = 2^n$, for some $n$, where each entry $a_k$ is a real or complex number
 		\item Each entry is called an \textbf{amplitude}
 		\item In the \textbf{standard basis}, the basis states are denoted by the vectors $\mathbf{e}_k$
 		\item We further identify $k$ with the $k$-th string $x$ in a fixed total ordering of $\{0,1\}^n$
@@ -188,16 +188,18 @@
 \end{frame}
 
 % 4
-%\begin{frame}{Capaian pembelajaran pertemuan}
-%    Setelah mengikuti pertemuan ini, mahasiswa mampu:
-%    \begin{enumerate}
-%        \item mendefinisikan sistem koordinat rectangular dan oblique;
-%        \item menentukan koordinat dan kedudukan titik pada bidang;
-%        \item membuktikan rumus jarak, titik tengah, dan titik pembagi ruas;
-%        \item membentuk persamaan grafik dan tempat kedudukan sederhana.
-%    \end{enumerate}
-%    \source{RPS Geometri Analitik SM234102}
-%\end{frame}
+\begin{frame}{The operations}
+    \begin{itemize}
+		\item Every state $\mathbf{a}$ must be a point on the unit sphere
+		\item The operations must map any point on the unit sphere to some (other) point on the unit sphere
+		\item Unitary operations: linear and onto the whole sphere (invertible)
+		\item The operations are represented by matrices, i.e. unitary matrices
+		\item Compositions of unitary operations are unitary
+		\item Start: the elementary vector $e_0 = \begin{bmatrix} 1 & 0 & 0 & \dots & 0 \end{bmatrix}^T$
+		\item Move: apply unitary transformation $U$, i.e. $b = U a$
+		\item End: we get information by making a measurement. If the final state is $c$, then $k$ is seen with probability $|c_k|^2$. The output is just the index $k$ without the probability.
+	\end{itemize}
+\end{frame}
 
 \section{Sistem Koordinat dan Kedudukan Titik}
 
