@@ -92,7 +92,7 @@
 
 \setbeamertemplate{footline}{
     \leavevmode
-    \hbox{
+    \hbox{%
         \begin{beamercolorbox}[
             wd=.75\paperwidth,
             ht=2.8ex,
@@ -100,7 +100,7 @@
             leftskip=0.5cm
         ]{normal text}
         \scriptsize \insertshorttitle
-        \end{beamercolorbox}
+        \end{beamercolorbox}%
         \begin{beamercolorbox}[
             wd=.25\paperwidth,
             ht=2.8ex,
@@ -108,7 +108,7 @@
             rightskip=0.5cm plus1fil
         ]{normal text}
         \hfill\scriptsize \insertframenumber/\inserttotalframenumber
-        \end{beamercolorbox}
+        \end{beamercolorbox}%
     }
 }
 
@@ -128,18 +128,32 @@
     \end{frame}
 }
 
+
+% Warna ilustrasi mengikuti palet template.
+\colorlet{navy}{AcademicBlue}
+\colorlet{teal}{AcademicBlue}
+\colorlet{pale}{SoftBlue}
+\colorlet{amber}{VectorPurple}
+\newcommand{\ket}[1]{\lvert #1\rangle}
+\newcommand{\bra}[1]{\langle #1\rvert}
+\newcommand{\ip}[2]{\langle #1\mid #2\rangle}
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\src}[1]{\par\vfill{\scriptsize\color{teal}Bacaan: #1.}}
+
+\newcommand{\bookref}[1]{\par\vfill{\scriptsize\color{gray}Lipton--Regan (2014), Bab 1, #1.}}
+\newcommand{\extra}{\par\textcolor{AcademicBlue}{\small Contoh pendamping (disusun untuk perkuliahan)}\par}
 \title[Topik Aljabar Terapan -- Pertemuan 1]{Topik Aljabar Terapan (SM255213)}
-\subtitle{\Large Introduction}
+\subtitle{\Large Bab 1: Introduction}
 \author{}
 \institute{
     Departemen Matematika\\
     Institut Teknologi Sepuluh Nopember
 }
-\date{Pertemuan 1}
+\date{Pertemuan 1 -- 100 menit}
+
 
 \begin{document}
-
-% 1
 \begin{frame}[plain]
     \vspace{0.15cm}
     \begin{flushleft}
@@ -162,43 +176,820 @@
     \vfill
 \end{frame}
 
-% 2
-\begin{frame}{Are quantum computers possible?}
-    \begin{itemize}
-		\item Classical computation operates on \textit{bits}, but quantum computation operates on \textit{qubits}
-		\item Such question is yet to be resolved
-		\item Fortunately, the question does not pose a barrier to us: we plan to study \textbf{quantum algorithms}
-		\item The mathematics required to understand them is linear algebra: vectors, matrices, and their basic properties
-	\end{itemize}
-    
+\begin{frame}{Panduan membaca slide bersama buku}
+\small
+
+\textbf{Sumber utama:} Richard J. Lipton dan Kenneth W. Regan (2014), \textit{Quantum Algorithms via Linear Algebra: A Primer}, MIT Press, Bab 1, hlm. 1--8.
+\begin{itemize}
+\item Urutan mengikuti Subbab 1.1--1.6. Rujukan halaman memakai nomor halaman cetak buku.
+\item Notasi utama mengikuti buku: vektor keadaan $a$, vektor basis $e_k$, dan matriks operasi $U$.
+\item Contoh pendamping memperinci perhitungan yang diperlukan untuk memahami model. Contoh ini bukan kutipan atau soal asli buku.
+\item Ilustrasi TikZ dibuat ulang untuk menjelaskan konsep. Pembahasan latihan tersedia pada lampiran.
+\end{itemize}
+\begin{block}{Fokus pertemuan}
+Memahami model algoritma kuantum dengan alat aljabar linear yang sudah dikenal. Tidak diperlukan pengetahuan mekanika kuantum sebelumnya.
+\end{block}
+
 \end{frame}
 
-% 3
-\begin{frame}{The model: the space and the states}
-    \begin{itemize}
-		\item The state is described by a single unit vector $\mathbf{a} = \begin{bmatrix} a_0 & \dots & a_{N-1} \end{bmatrix}^T$ that lies in some fixed vector space of dimension $N = 2^n$, for some $n$, where each entry $a_k$ is a real or complex number
-		\item Each entry is called an \textbf{amplitude}
-		\item In the \textbf{standard basis}, the basis states are denoted by the vectors $\mathbf{e}_k$
-		\item We further identify $k$ with the $k$-th string $x$ in a fixed total ordering of $\{0,1\}^n$
-		\item Since basis states correspond to all the length-$n$ binary strings, we have $N = 2^n$
-		\item Any vector that is not a basis state is a \textbf{superposition}
-		\item The squared absolute value $|a_k|^2$ gives the probability of measuring the system to be in the basis state $\mathbf{e}_k$
-		\item Vector $\mathbf{a}$ is a unit vector, namely $\sum_{k=0}^{N-1} |a_k|^2 = 1$
-	\end{itemize}
+\begin{frame}{Peta Bab 1 dan alokasi 100 menit}
+
+\small
+\begin{tabular}{p{6.7cm}p{2.7cm}r}
+\toprule
+Bagian buku & Halaman cetak & Waktu\\\midrule
+Pendahuluan dan 1.1: The Model & 1--3 & 10 menit\\
+1.2: The Space and the States & 3--4 & 25 menit\\
+1.3: The Operations & 5--6 & 25 menit\\
+1.4: Where Is the Input? & 6 & 10 menit\\
+1.5: What Exactly Is the Output? & 7 & 10 menit\\
+1.6: Summary and Notes, latihan, diskusi & 8 & 20 menit\\\bottomrule
+\end{tabular}
+\par\medskip
+\normalsize
+Setelah kuliah, mahasiswa dapat membaca model
+\[
+ e_0\ \xrightarrow{\ U\ }\ c=Ue_0
+ \quad\xrightarrow{\text{ukur}}\quad
+ k\text{ dengan probabilitas }|c_k|^2
+\]
+dan menjelaskan di mana masukan berada serta apa yang sebenarnya menjadi keluaran.
+
 \end{frame}
 
-% 4
-\begin{frame}{The operations}
-    \begin{itemize}
-		\item Every state $\mathbf{a}$ must be a point on the unit sphere
-		\item The operations must map any point on the unit sphere to some (other) point on the unit sphere
-		\item Unitary operations: linear and onto the whole sphere (invertible)
-		\item The operations are represented by matrices, i.e. unitary matrices
-		\item Compositions of unitary operations are unitary
-		\item Start: the elementary vector $e_0 = \begin{bmatrix} 1 & 0 & 0 & \dots & 0 \end{bmatrix}^T$
-		\item Move: apply unitary transformation $U$, i.e. $b = U a$
-		\item End: we get information by making a measurement. If the final state is $c$, then $k$ is seen with probability $|c_k|^2$. The output is just the index $k$ without the probability.
-	\end{itemize}
+\begin{frame}{Pendahuluan: mengapa mulai dari aljabar linear?}
+
+Buku memisahkan dua persoalan:
+\begin{enumerate}
+\item Bagaimana perangkat kuantum dibangun secara fisik?
+\item Bagaimana algoritma bekerja dalam model matematika kuantum?
+\end{enumerate}
+Pertemuan ini berfokus pada persoalan kedua.
+\begin{block}{Tiga alat matematika utama}
+Vektor untuk menyatakan keadaan, matriks untuk mengubah keadaan, dan probabilitas untuk menjelaskan hasil yang dibaca.
+\end{block}
+Komputasi klasik menggunakan bit dengan nilai $0$ atau $1$. Model kuantum menggunakan amplitudo real atau kompleks, tetapi hasil pembacaannya tetap berupa informasi klasik.
+\bookref{pendahuluan, hlm. 1--2}
+
+\end{frame}
+
+\begin{frame}{1.1 The Model: model sebagai aturan matematika}
+
+Sebuah model komputasi perlu menjawab:
+\begin{center}
+\begin{tikzpicture}[>=Stealth,node distance=8mm]
+\node[draw=teal,fill=pale,align=center,text width=34mm,minimum height=17mm] (a) {Keadaan\\Bagaimana informasi direpresentasikan?};
+\node[draw=teal,fill=pale,align=center,text width=34mm,minimum height=17mm,right=of a] (b) {Operasi\\Bagaimana keadaan berubah?};
+\node[draw=teal,fill=pale,align=center,text width=34mm,minimum height=17mm,right=of b] (c) {Pembacaan\\Bagaimana hasil diperoleh?};
+\draw[->,thick] (a)--(b);\draw[->,thick] (b)--(c);
+\end{tikzpicture}
+\end{center}
+\begin{itemize}
+\item Kita menerima aturan model, lalu menelusuri konsekuensi matematisnya.
+\item Penjelasan tentang partikel, relativitas, atau perangkat keras tidak diperlukan untuk perhitungan di bab ini.
+\item Model algoritmik tetap perlu membatasi operasi yang dapat dilaksanakan secara efisien.
+\end{itemize}
+\bookref{Subbab 1.1, hlm. 2--3; pengantar kelayakan pada Subbab 1.3}
+
+\end{frame}
+
+\begin{frame}{1.2 The Space and the States: kamus notasi}
+
+\begin{center}
+\begin{tabular}{cl}\toprule
+Notasi & Makna\\\midrule
+$n$ & Jumlah bit pada label basis, atau jumlah qubit\\[1mm]
+$N=2^n$ & Dimensi ruang keadaan\\[1mm]
+$\mathcal H_N$ & Ruang $\R^N$ atau $\C^N$ dalam pembahasan buku\\[1mm]
+$a=(a_0,\ldots,a_{N-1})^T$ & Vektor keadaan murni\\[1mm]
+$a_k$ & Amplitudo pada posisi $k$\\[1mm]
+$e_k$ & Vektor basis standar pada posisi $k$\\[1mm]
+$|a_k|^2$ & Probabilitas membaca indeks $k$\\\bottomrule
+\end{tabular}
+\end{center}
+\textbf{Perhatikan:} indeks komponen dimulai dari $0$, sehingga indeks terakhir adalah $N-1$.
+\bookref{Subbab 1.2, hlm. 3--4}
+
+\end{frame}
+
+\begin{frame}{Mengapa dimensi ruang adalah $N=2^n$?}
+
+Label basis adalah semua string biner dengan panjang tetap $n$. Setiap posisi memiliki dua pilihan, sehingga terdapat $2^n$ label.
+\[
+ n=2:\qquad \{00,01,10,11\},\qquad N=4.
+\]
+\begin{center}
+\begin{tabular}{cccc}\toprule
+Indeks $k$ & String biner & Vektor basis & Dimensi vektor\\\midrule
+0 & 00 & $e_0=(1,0,0,0)^T$ & 4\\
+1 & 01 & $e_1=(0,1,0,0)^T$ & 4\\
+2 & 10 & $e_2=(0,0,1,0)^T$ & 4\\
+3 & 11 & $e_3=(0,0,0,1)^T$ & 4\\\bottomrule
+\end{tabular}
+\end{center}
+\textbf{Pembedaan penting:} dua qubit berarti vektor keadaan berdimensi empat. Satu hasil pengukuran lengkap adalah satu string yang terdiri atas dua bit.
+\bookref{Subbab 1.2, hlm. 3; tabel merupakan contoh pendamping}
+
+\end{frame}
+
+\begin{frame}{Keadaan harus berupa vektor satuan}
+\setlength{\abovedisplayskip}{5pt}\setlength{\belowdisplayskip}{5pt}
+
+Vektor keadaan yang sah memenuhi
+\[
+ a=\begin{pmatrix}a_0\\\vdots\\a_{N-1}\end{pmatrix},\qquad
+ \|a\|^2=\sum_{k=0}^{N-1}|a_k|^2=1.
+\]
+\begin{itemize}
+\item Untuk amplitudo real, $|a_k|^2=a_k^2$.
+\item Untuk amplitudo kompleks $a_k=x+iy$, berlaku $|a_k|^2=x^2+y^2$.
+\item Syarat norma satu membuat jumlah probabilitas hasil sama dengan satu.
+\end{itemize}
+\begin{block}{Ruang lingkup buku}
+Bab ini menggunakan keadaan murni yang direpresentasikan oleh satu vektor. Teori keadaan campuran tidak diperlukan untuk mengikuti alur ini.
+\end{block}
+\vspace{-4pt}
+\bookref{Subbab 1.2, hlm. 3--4}
+
+\end{frame}
+
+\begin{frame}{Contoh pendamping: normalisasi dan amplitudo kompleks}
+
+\extra
+\begin{columns}[T]
+\begin{column}{.48\textwidth}
+\textbf{Vektor real}
+\[
+ v=\begin{pmatrix}3\\4\end{pmatrix},\quad \|v\|=5.
+\]
+\[
+ a=\frac v5=\begin{pmatrix}3/5\\4/5\end{pmatrix}.
+\]
+\[
+ p_0=\frac9{25},\quad p_1=\frac{16}{25}.
+\]
+Amplitudo $3/5$ berbeda dari probabilitas $9/25$.
+\end{column}
+\begin{column}{.48\textwidth}
+\textbf{Vektor kompleks}
+\[
+ b=\frac1{\sqrt2}\begin{pmatrix}1\\i\end{pmatrix}.
+\]
+\[
+ \|b\|^2=\frac{|1|^2+|i|^2}{2}=1.
+\]
+\[
+ p_0=p_1=\frac12.
+\]
+Gunakan $|i|^2=1$, bukan $i^2=-1$, untuk menghitung probabilitas.
+\end{column}
+\end{columns}
+\bookref{pendamping Subbab 1.2, hlm. 3--4}
+
+\end{frame}
+
+\begin{frame}{Keadaan basis dan superposisi}
+\setlength{\abovedisplayskip}{5pt}\setlength{\belowdisplayskip}{5pt}
+
+Setiap keadaan memiliki ekspansi
+\[
+ a=\sum_{k=0}^{N-1}a_ke_k.
+\]
+\textbf{Keadaan basis:} hanya satu komponen yang tidak nol. Wakil standarnya adalah $e_k$.
+\par\medskip
+\textbf{Superposisi terhadap basis standar:} sedikitnya dua komponen memiliki amplitudo tidak nol.
+\[
+ a=\frac35e_0+\frac45e_1
+ \quad\text{dan}\quad
+ b=\frac1{\sqrt2}e_0+\frac{i}{\sqrt2}e_1.
+\]
+Satu pengukuran menghasilkan satu label basis. Kita tidak mendapatkan semua komponen vektor sekaligus.
+\par\medskip
+{\small Catatan ketelitian: kelipatan fase $e^{i\gamma}e_k$ tetap merepresentasikan keadaan basis yang sama, bukan superposisi baru.}
+\vspace{-4pt}
+\bookref{Subbab 1.2, hlm. 3--4; catatan fase adalah klarifikasi matematis}
+
+\end{frame}
+
+\begin{frame}{Geometri buku: lingkaran satuan pada ruang real}
+
+\begin{columns}[c]
+\begin{column}{.46\textwidth}
+\centering
+\begin{tikzpicture}[scale=2,>=Stealth]
+\draw[gray!45] (0,0) circle (1);
+\draw[->] (-1.1,0)--(1.25,0) node[right] {$a_0$};
+\draw[->] (0,-1.1)--(0,1.25) node[above] {$a_1$};
+\draw[->,very thick,teal] (0,0)--(.6,.8) node[above right] {$a$};
+\draw[dashed,amber] (.6,0)--(.6,.8)--(0,.8);
+\node[below,amber] at (.6,0) {$3/5$};
+\node[left,amber] at (0,.8) {$4/5$};
+\fill (1,0) circle (.02) node[above] {$e_0$};
+\fill (0,1) circle (.02) node[left] {$e_1$};
+\draw[teal] (.28,0) arc (0:53.13:.28);
+\node[teal] at (.38,.20) {$\theta$};
+\end{tikzpicture}
+\end{column}
+\begin{column}{.50\textwidth}
+Untuk $N=2$ dengan amplitudo real,
+\[
+ a=\begin{pmatrix}\cos\theta\\\sin\theta\end{pmatrix}.
+\]
+\[
+ p_0=\cos^2\theta,\qquad p_1=\sin^2\theta.
+\]
+Pada contoh: $\cos\theta=3/5$ dan $\sin\theta=4/5$.
+\par\medskip
+\textbf{Makna gambar:} koordinat adalah amplitudo, sedangkan kuadrat panjang komponennya menentukan probabilitas.
+\par\medskip
+{\small Ini adalah bidang amplitudo real, bukan bola Bloch.}
+\end{column}
+\end{columns}
+\bookref{Subbab 1.2, hlm. 4; ilustrasi dan angka pendamping}
+
+\end{frame}
+
+\begin{frame}{Dua normalisasi: amplitudo dan probabilitas}
+\setlength{\abovedisplayskip}{5pt}\setlength{\belowdisplayskip}{5pt}
+
+\begin{columns}[c]
+\begin{column}{.46\textwidth}
+\centering
+\begin{tikzpicture}[scale=2.7,>=Stealth]
+\draw[->] (0,0)--(1.2,0) node[right] {$x$};
+\draw[->] (0,0)--(0,1.2) node[above] {$y$};
+\draw[very thick,teal] (1,0) arc (0:90:1);
+\draw[very thick,amber,dashed] (1,0)--(0,1);
+\fill[teal] (.6,.8) circle (.025) node[right] {$a$};
+\fill[amber] (.36,.64) circle (.025) node[left] {$p$};
+\node[below] at (1,0) {1};\node[left] at (0,1) {1};
+\end{tikzpicture}
+\end{column}
+\begin{column}{.50\textwidth}
+\textcolor{teal}{\textbf{Amplitudo real nonnegatif:}}
+\[
+ a_0^2+a_1^2=1.
+\]
+Titik $a=(3/5,4/5)$ berada pada busur lingkaran.
+\par\medskip
+\textcolor{amber}{\textbf{Probabilitas klasik:}}
+\[
+ p_0+p_1=1,\qquad p_j\geq0.
+\]
+Titik $p=(9/25,16/25)$ berada pada ruas garis.
+\end{column}
+\end{columns}
+\small
+Gambar membandingkan dua ruang koordinat. Aturan probabilitas $p_k=|a_k|^2$ adalah aturan model, bukan sesuatu yang dapat dibuktikan hanya dari bentuk lingkaran.
+\bookref{Subbab 1.2, hlm. 4; ilustrasi perbandingan pendamping}
+
+\end{frame}
+
+\begin{frame}{Contoh empat dimensi: satu vektor, empat kemungkinan}
+\small
+
+\extra
+\[
+ a=\frac12\begin{pmatrix}1\\-1\\i\\1\end{pmatrix},\qquad
+ \|a\|^2=\frac{1+1+1+1}{4}=1.
+\]
+\begin{center}
+\begin{tabular}{cccc}\toprule
+Indeks & Label & Amplitudo & Probabilitas\\\midrule
+0 & 00 & $1/2$ & $1/4$\\
+1 & 01 & $-1/2$ & $1/4$\\
+2 & 10 & $i/2$ & $1/4$\\
+3 & 11 & $1/2$ & $1/4$\\\bottomrule
+\end{tabular}
+\end{center}
+\textbf{Pertanyaan:} apakah amplitudo negatif menghasilkan probabilitas negatif? Mengapa satu hasil pengukuran tidak cukup untuk mengetahui keempat amplitudo?
+\bookref{pendamping Subbab 1.2, hlm. 3--4}
+
+\end{frame}
+
+\begin{frame}{1.3 The Operations: perubahan keadaan harus sah}
+\small
+
+Operasi sebelum pengukuran ditulis sebagai perkalian matriks:
+\[
+ b=Ua.
+\]
+Buku mensyaratkan operasi yang linear dan mempertahankan himpunan vektor satuan. Operasi tersebut bersifat reversibel.
+\begin{block}{Syarat matriks uniter}
+\[
+ U^\dagger U=I,\qquad U^{-1}=U^\dagger.
+\]
+$U^\dagger$ berarti transpose konjugat. Untuk matriks real, syaratnya $U^TU=I$ dan istilah khususnya adalah matriks ortogonal.
+\end{block}
+\small
+Persamaan ini memperjelas istilah \textit{unitary} yang diperkenalkan Bab 1. Buku memberikan rincian sifat matriks tersebut pada Bab 3.
+\bookref{Subbab 1.3, hlm. 5}
+
+\end{frame}
+
+\begin{frame}{Mengapa uniter mempertahankan normalisasi?}
+
+\textcolor{teal}{\small Penjabaran aljabar pendamping}
+\[
+ b=Ua.
+\]
+Dengan definisi norma dan sifat transpose konjugat,
+\begin{align*}
+ \|b\|^2&=b^\dagger b\\
+ &=(Ua)^\dagger(Ua)\\
+ &=a^\dagger U^\dagger Ua\\
+ &=a^\dagger a=\|a\|^2.
+\end{align*}
+Jadi, jika keadaan awal sah, keadaan setelah operasi uniter juga sah.
+\par\medskip
+\textbf{Cek sederhana:} $2I$ invertibel, tetapi bukan uniter. Untuk vektor satuan $a$, berlaku $\|2Ia\|=2$, sehingga hasilnya tidak ternormalisasi.
+\bookref{pendamping Subbab 1.3, hlm. 5}
+
+\end{frame}
+
+\begin{frame}{Contoh operasi: rotasi mempertahankan lingkaran}
+
+\extra
+\begin{columns}[c]
+\begin{column}{.52\textwidth}
+\[
+ U=\begin{pmatrix}3/5&-4/5\\4/5&3/5\end{pmatrix}.
+\]
+\[
+ U^TU=\frac1{25}\begin{pmatrix}3&4\\-4&3\end{pmatrix}
+ \begin{pmatrix}3&-4\\4&3\end{pmatrix}=I.
+\]
+\[
+ Ue_0=\begin{pmatrix}3/5\\4/5\end{pmatrix}.
+\]
+Rotasi ini mengubah basis awal menjadi superposisi tanpa mengubah panjang vektor.
+\end{column}
+\begin{column}{.43\textwidth}
+\centering
+\begin{tikzpicture}[scale=1.7,>=Stealth]
+\draw[gray!40] (0,0) circle (1);
+\draw[->,gray] (-1.1,0)--(1.2,0);
+\draw[->,gray] (0,-1.1)--(0,1.2);
+\draw[->,very thick,navy] (0,0)--(1,0) node[below] {$e_0$};
+\draw[->,very thick,teal] (0,0)--(.6,.8) node[above right] {$Ue_0$};
+\draw[->,amber,thick] (.78,0) arc (0:53.13:.78);
+\node[amber] at (.9,.5) {$U$};
+\end{tikzpicture}
+\end{column}
+\end{columns}
+\bookref{pendamping Subbab 1.3, hlm. 5}
+
+\end{frame}
+
+\begin{frame}{Program adalah komposisi matriks}
+\small
+
+Jika $U_1$ bekerja lebih dahulu, kemudian $U_2$, maka
+\[
+ a\xrightarrow{U_1}b=U_1a\xrightarrow{U_2}c=U_2U_1a.
+\]
+\textbf{Matriks paling kanan bekerja lebih dahulu.}
+\par\medskip
+Komposisi matriks uniter tetap uniter:
+\[
+ (U_2U_1)^\dagger(U_2U_1)
+ =U_1^\dagger U_2^\dagger U_2U_1
+ =U_1^\dagger U_1=I.
+\]
+Untuk $t$ langkah,
+\[
+ c=U_tU_{t-1}\cdots U_1e_0.
+\]
+\begin{block}{Cara membaca algoritma}
+Telusuri vektor setelah setiap operasi. Jangan langsung mengubah amplitudo menjadi probabilitas sebelum tahap pengukuran.
+\end{block}
+\vspace{-4pt}
+\bookref{Subbab 1.3, hlm. 5}
+
+\end{frame}
+
+\begin{frame}{Model inti buku: Start, Move, End}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth,node distance=9mm]
+\node[draw=teal,fill=pale,align=center,text width=31mm,minimum height=17mm] (a) {\textbf{Start}\\$e_0=(1,0,\ldots,0)^T$};
+\node[draw=teal,fill=pale,align=center,text width=31mm,minimum height=17mm,right=of a] (b) {\textbf{Move}\\$c=Ue_0$};
+\node[draw=teal,fill=pale,align=center,text width=31mm,minimum height=17mm,right=of b] (c) {\textbf{End}\\baca satu indeks $k$};
+\draw[->,thick] (a)--(b);\draw[->,thick] (b)--(c);
+\end{tikzpicture}
+\end{center}
+\begin{enumerate}
+\item \textbf{Start:} mulai dari keadaan basis yang mewakili string $0^n$.
+\item \textbf{Move:} gunakan operasi uniter yang diizinkan.
+\item \textbf{End:} ukur sehingga indeks $k$ muncul dengan probabilitas $|c_k|^2$.
+\end{enumerate}
+Keluaran satu percobaan adalah indeks $k$, bukan angka probabilitas $|c_k|^2$ dan bukan seluruh vektor $c$.
+\bookref{Subbab 1.3, hlm. 5--6}
+
+\end{frame}
+
+\begin{frame}{Contoh lengkap: dua operasi, kemudian pengukuran}
+\small
+
+\extra
+\[
+ U=\begin{pmatrix}3/5&-4/5\\4/5&3/5\end{pmatrix},\qquad
+ P=\begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\]
+\begin{align*}
+ \text{Start:}\quad & e_0=\begin{pmatrix}1\\0\end{pmatrix}.\\
+ \text{Move 1:}\quad & b=Ue_0=\begin{pmatrix}3/5\\4/5\end{pmatrix}.\\
+ \text{Move 2:}\quad & c=Pb=\begin{pmatrix}4/5\\3/5\end{pmatrix}.
+\end{align*}
+\textbf{End:} $p_0=16/25$ dan $p_1=9/25$. Matriks program keseluruhan adalah $PU$, bukan $UP$.
+\bookref{pendamping Subbab 1.3, hlm. 5--6}
+
+\end{frame}
+
+\begin{frame}{Pengukuran: satu hasil dari distribusi}
+
+\begin{center}
+\begin{tikzpicture}[>=Stealth]
+\node[draw=teal,fill=pale,align=center,minimum height=15mm] (c) at (0,0) {$c=(4/5,3/5)^T$};
+\node[draw=teal,minimum width=34mm,minimum height=11mm] (a) at (6,1) {Indeks $0$};
+\node[draw=amber,minimum width=34mm,minimum height=11mm] (b) at (6,-1) {Indeks $1$};
+\draw[->,thick,teal] (c)--node[above,sloped] {$16/25$} (a);
+\draw[->,thick,amber] (c)--node[below,sloped] {$9/25$} (b);
+\end{tikzpicture}
+\end{center}
+\begin{itemize}
+\item Satu kali menjalankan program hanya menghasilkan 0 atau 1.
+\item Jika program disiapkan dan dijalankan ulang secara independen, frekuensi relatif dapat digunakan untuk memperkirakan probabilitasnya.
+\item Probabilitas menyatakan pola statistik, bukan kepastian hasil setiap percobaan.
+\end{itemize}
+\bookref{Subbab 1.3, hlm. 6; kaitan sampling pada Subbab 1.5, hlm. 7}
+
+\end{frame}
+
+\begin{frame}{Menerima atau menolak: himpunan keluaran $S$}
+
+Buku memperkenalkan himpunan indeks $S$ yang diartikan sebagai \textit{accept}. Indeks di luar $S$ diartikan sebagai \textit{reject}.
+\[
+ \Pr(\text{accept})=\sum_{k\in S}|c_k|^2.
+\]
+\extra
+\[
+ c=(1/2,\,1/2,\,1/\sqrt2,\,0)^T,\qquad S=\{1,2\}.
+\]
+Vektor ini ternormalisasi karena $1/4+1/4+1/2=1$.
+\[
+ \Pr(\text{accept})=\frac14+\frac12=\frac34,
+ \qquad \Pr(\text{reject})=\frac14.
+\]
+Hasil ukur adalah satu indeks. Aturan klasik kemudian memetakan indeks itu menjadi keputusan.
+\bookref{Subbab 1.3, hlm. 6; angka merupakan contoh pendamping}
+
+\end{frame}
+
+\begin{frame}{Ukuran matriks dan kelayakan operasi}
+\small
+
+Untuk $n$ qubit, keadaan berdimensi $N=2^n$, sedangkan matriks penuh berukuran $N\times N$.
+\[
+ \text{Jumlah entri matriks penuh}=N^2=4^n.
+\]
+\begin{center}
+\begin{tabular}{rrr}\toprule
+$n$ & $N$ & Jumlah entri matriks penuh\\\midrule
+2 & 4 & 16\\
+5 & 32 & 1.024\\
+10 & 1.024 & 1.048.576\\\bottomrule
+\end{tabular}
+\end{center}
+\begin{block}{Pesan penting buku}
+Sah secara aljabar tidak otomatis berarti efisien secara komputasional. Kita memerlukan operasi dengan deskripsi dan implementasi yang layak. Buku membahasnya lebih lanjut pada Bab 4--5.
+\end{block}
+\bookref{Subbab 1.3, hlm. 5; tabel merupakan contoh pendamping}
+
+\end{frame}
+
+\begin{frame}{1.4 Where Is the Input?: masukan berada pada operasi}
+\small
+
+Jika keadaan awal selalu $e_0$, bagaimana kita menyatakan masalah yang berbeda?
+\begin{block}{Jawaban buku}
+Masukan dapat dikodekan dalam pilihan transformasi. Untuk masukan $x$, tulis matriks program sebagai $U_x$.
+\end{block}
+\[
+ c_x=U_xe_0.
+\]
+Sebagian operasi awal dapat menyiapkan masukan, sedangkan operasi berikutnya melakukan pemrosesan yang sama untuk berbagai masukan.
+\[
+ U_x=V A_x,\qquad c_x=V A_xe_0.
+\]
+Di sini $A_x$ menyiapkan informasi masukan, dan $V$ memprosesnya. Notasi ini merupakan penjabaran dari gagasan buku.
+\bookref{Subbab 1.4, hlm. 6}
+
+\end{frame}
+
+\begin{frame}{Analogi buku: nilai masukan menjadi bagian program}
+
+Buku menggunakan program pemfaktoran dengan nilai $M$ yang sudah ditentukan:
+\begin{center}
+\begin{tikzpicture}[>=Stealth]
+\node[draw=teal,fill=pale,align=left,text width=45mm,minimum height=16mm] (a) at (0,0) {Tetapkan $M=21$\\Jalankan Factor$(M)$};
+\node[draw=teal,fill=pale,align=left,text width=45mm,minimum height=16mm] (b) at (7.2,0) {Tetapkan $M=35$\\Jalankan Factor$(M)$};
+\draw[->,thick] (a)--node[above,align=center,font=\small] {ubah\\masukan} (b);
+\end{tikzpicture}
+\end{center}
+Kerangka algoritma dapat tetap sama, tetapi nilai yang disisipkan berubah.
+\par\medskip
+Pada model kuantum, perubahan masukan dapat mengubah sebagian transformasi di dalam program $U$.
+\par\medskip
+\textbf{Batas analogi:} contoh ini menjelaskan lokasi masukan. Bab 1 belum memberikan algoritma pemfaktoran kuantum.
+\bookref{Subbab 1.4, hlm. 6}
+
+\end{frame}
+
+\begin{frame}{Contoh pendamping: menyiapkan masukan 0 atau 1}
+
+\extra
+\[
+ A_0=I=\begin{pmatrix}1&0\\0&1\end{pmatrix},\qquad
+ A_1=P=\begin{pmatrix}0&1\\1&0\end{pmatrix}.
+\]
+Dengan keadaan awal yang sama,
+\[
+ A_0e_0=e_0,\qquad A_1e_0=e_1.
+\]
+Jika pemrosesan berikutnya menggunakan matriks rotasi $V=U$ pada contoh terdahulu,
+\[
+ VA_0e_0=\begin{pmatrix}3/5\\4/5\end{pmatrix},\qquad
+ VA_1e_0=\begin{pmatrix}-4/5\\3/5\end{pmatrix}.
+\]
+Distribusi keluaran berubah dari $(9/25,16/25)$ menjadi $(16/25,9/25)$. Masukan berbeda tidak harus berarti keadaan awal model berbeda.
+\bookref{pendamping Subbab 1.4, hlm. 6}
+
+\end{frame}
+
+\begin{frame}{1.5 What Exactly Is the Output?: tiga tingkat keluaran}
+
+\begin{center}
+\begin{tabular}{p{3.2cm}p{4.4cm}p{4.1cm}}\toprule
+Tingkat & Yang diperoleh & Contoh\\\midrule
+Keadaan sebelum ukur & Vektor $c=U_xe_0$ & Amplitudo $c_k$\\[2mm]
+Satu percobaan & Satu sampel indeks $k$ & Label 10, yakni indeks 2\\[2mm]
+Penyelesaian masalah & Interpretasi atau pengolahan klasik atas sampel & Terima/tolak, kandidat solusi\\\bottomrule
+\end{tabular}
+\end{center}
+\par\medskip
+Buku menekankan algoritma kuantum sebagai pembentuk suatu distribusi yang dapat disampel.
+\par\medskip
+\textbf{Tujuan desain:} membuat hasil pengukuran memberikan informasi berguna dengan probabilitas yang cukup besar dan biaya yang efisien.
+\bookref{Subbab 1.5, hlm. 7}
+
+\end{frame}
+
+\begin{frame}{Ilustrasi sampling: probabilitas dan frekuensi}
+
+\extra
+\begin{columns}[c]
+\begin{column}{.46\textwidth}
+\centering
+\begin{tikzpicture}[x=1.8cm,y=2.7cm,>=Stealth]
+\draw[->] (0,0)--(0,1.1) node[above] {$p_k$};
+\draw[->] (0,0)--(2.4,0) node[right] {$k$};
+\draw[gray!35,dashed] (0,1)--(2.1,1);
+\node[left] at (0,1) {1};
+\fill[teal] (.45,0) rectangle (.95,.64);
+\fill[amber] (1.35,0) rectangle (1.85,.36);
+\node[above] at (.7,.64) {$16/25$};
+\node[above] at (1.6,.36) {$9/25$};
+\node[below] at (.7,0) {0};\node[below] at (1.6,0) {1};
+\end{tikzpicture}
+\end{column}
+\begin{column}{.50\textwidth}
+Jika dilakukan $m=100$ percobaan independen dengan persiapan ulang yang sama,
+\[
+ \mathbb E[N_0]=100\frac{16}{25}=64,
+\]
+\[
+ \mathbb E[N_1]=36.
+\]
+$N_k$ menyatakan banyaknya hasil $k$.
+\par\medskip
+Angka 64 dan 36 adalah nilai harapan. Hasil aktual tidak harus persis sama.
+\end{column}
+\end{columns}
+\bookref{pendamping konsep sampling, Subbab 1.5, hlm. 7}
+
+\end{frame}
+
+\begin{frame}{Peluang berhasil dan peran pengulangan}
+
+\textcolor{teal}{\small Contoh pendamping probabilitas}
+Misalkan sebuah percobaan menghasilkan kandidat benar dengan probabilitas $p=3/4$, dan kandidat benar dapat diverifikasi.
+\par\medskip
+Untuk $r$ percobaan independen:
+\[
+ \Pr(\text{semua gagal})=(1-p)^r,
+\]
+\[
+ \Pr(\text{minimal satu berhasil})=1-(1-p)^r.
+\]
+Untuk $r=3$,
+\[
+ \Pr(\text{minimal satu berhasil})=1-\left(\frac14\right)^3=\frac{63}{64}.
+\]
+\small
+Ini bukan aturan untuk menerima jika ada satu keluaran \textit{accept} pada setiap masalah keputusan. Cara menggabungkan hasil harus mengikuti jenis masalah dan cara memverifikasi solusi.
+\bookref{motivasi pengulangan pada Subbab 1.5, hlm. 7; rumus adalah pengayaan pendamping}
+
+\end{frame}
+
+\begin{frame}{1.6 Summary and Notes: keluaran dapat deterministik}
+
+Jika keadaan akhir adalah vektor basis $c=e_j$, maka
+\[
+ \Pr(k=j)=1,\qquad \Pr(k\neq j)=0.
+\]
+\extra
+Untuk matriks uniter $U$,
+\[
+ e_0\xrightarrow{U}Ue_0\xrightarrow{U^\dagger}U^\dagger Ue_0=e_0.
+\]
+Keadaan antara dapat berupa superposisi, tetapi hasil akhir selalu 0.
+\par\medskip
+Dengan demikian, model kuantum mencakup keluaran pasti maupun probabilistik. Bab 1 mengajak pembaca menerima probabilitas sebagai bagian penting dalam analisis algoritma.
+\bookref{Subbab 1.6, hlm. 8}
+
+\end{frame}
+
+\begin{frame}{Ringkasan Bab 1 dalam satu perhitungan}
+
+\begin{block}{Model matematis}
+\[
+ a=e_0\in\mathcal H_N,\quad N=2^n,\qquad
+ c=U_xa,\qquad \Pr(k)=|c_k|^2.
+\]
+\end{block}
+\begin{enumerate}
+\item Tentukan ukuran ruang dan arti label basis.
+\item Tentukan bagaimana masukan $x$ dikodekan dalam $U_x$.
+\item Hitung perubahan keadaan melalui perkalian matriks.
+\item Ubah amplitudo akhir menjadi distribusi probabilitas.
+\item Tafsirkan hasil ukur untuk menjawab masalah yang diberikan.
+\end{enumerate}
+\textbf{Yang belum diselesaikan Bab 1:} cara merancang operasi efisien dan algoritma yang memberi keuntungan komputasional. Itu merupakan tujuan bab-bab berikutnya.
+\bookref{Subbab 1.2--1.6, hlm. 3--8}
+
+\end{frame}
+
+\begin{frame}{Latihan diskusi: satu masalah untuk setiap mahasiswa}
+
+\small\textbf{Alokasi:} 6 menit pengerjaan, 9 menit presentasi, 5 menit rangkuman.
+\normalsize
+\begin{enumerate}
+\item \textbf{Keadaan dan keluaran.} Untuk $n=2$, diberikan
+\[
+ a=\frac1{\sqrt{10}}(1,2,i,2)^T.
+\]
+Periksa normalisasi, hitung distribusi hasil, dan tentukan peluang \textit{accept} jika $S=\{1,3\}$.
+\item \textbf{Operasi.} Untuk $U=\frac15\begin{pmatrix}3&-4\\4&3\end{pmatrix}$, hitung $U^2e_0$ dan distribusi hasilnya. Bandingkan dengan $U^TUe_0$.
+\item \textbf{Masukan dan sampling.} Dengan $A_0=I$, $A_1=P$, dan $V=U$, hitung peluang keluaran 1 untuk masing-masing masukan. Apakah satu hasil 1 menentukan masukan secara pasti?
+\end{enumerate}
+\par\medskip
+\small Seluruh soal merupakan latihan pendamping, bukan soal asli Bab 1. Pembahasan terdapat di lampiran.
+
+\end{frame}
+
+\begin{frame}{Panduan belajar setelah pertemuan}
+
+\begin{enumerate}
+\item Baca ulang Subbab 1.2 sambil menuliskan $e_0,e_1$ untuk $N=2$ dan $e_0,\ldots,e_3$ untuk $N=4$.
+\item Baca Subbab 1.3 dan ulangi contoh Start--Move--End tanpa melihat solusi.
+\item Baca Subbab 1.4--1.5, lalu jelaskan dengan kata-kata sendiri perbedaan masukan, keadaan akhir, dan hasil pengukuran.
+\item Gunakan Bab 2 untuk memperkuat pemetaan indeks dengan string biner, kemudian Bab 3 untuk meninjau aljabar linear yang diperlukan.
+\end{enumerate}
+\begin{block}{Tiga pertanyaan pemeriksaan diri}
+Mengapa jumlah probabilitas sama dengan satu? Mengapa matriks harus uniter? Mengapa satu hasil ukur bukan seluruh vektor keadaan?
+\end{block}
+
+\end{frame}
+
+\begin{frame}{Referensi dan catatan penggunaan sumber}
+
+\textbf{Referensi utama}
+\par\medskip
+Richard J. Lipton dan Kenneth W. Regan. 2014.\par
+\textit{Quantum Algorithms via Linear Algebra: A Primer}.\par
+The MIT Press. ISBN 978-0-262-02839-4.
+\par\medskip
+\textbf{Bagian yang menjadi dasar slide:} Bab 1, \textit{Introduction}, hlm. 1--8 (halaman PDF 16--23 pada berkas yang diberikan).
+\begin{itemize}
+\item Isi diringkas dan dijelaskan ulang dalam bahasa Indonesia dengan mempertahankan urutan konsep dan notasi utama buku.
+\item Contoh numerik, latihan, pembuktian tambahan, dan gambar TikZ merupakan materi pendamping untuk pengajaran.
+\item Pernyataan tentang perkembangan perangkat keras dalam buku merupakan konteks tahun 2014. Slide ini berfokus pada model matematika dan tidak menggunakan pernyataan tersebut sebagai status teknologi terkini.
+\end{itemize}
+
+\end{frame}
+
+\appendix
+
+\begin{frame}{Lampiran A: pembahasan latihan 1}
+
+\[
+ a=\frac1{\sqrt{10}}(1,2,i,2)^T.
+\]
+\textbf{1. Normalisasi}
+\[
+ \|a\|^2=\frac{|1|^2+|2|^2+|i|^2+|2|^2}{10}
+ =\frac{1+4+1+4}{10}=1.
+\]
+\textbf{2. Distribusi pengukuran}
+\[
+ (p_0,p_1,p_2,p_3)=\left(\frac1{10},\frac4{10},\frac1{10},\frac4{10}\right).
+\]
+\textbf{3. Peluang menerima}
+\[
+ S=\{1,3\}\quad\Longrightarrow\quad
+ \Pr(\text{accept})=p_1+p_3=\frac8{10}=\frac45.
+\]
+Indeks 1 dan 3 masing-masing mewakili string 01 dan 11.
+
+\end{frame}
+
+\begin{frame}{Lampiran B: pembahasan latihan 2}
+
+\[
+ U^2=\frac1{25}\begin{pmatrix}3&-4\\4&3\end{pmatrix}^2
+ =\frac1{25}\begin{pmatrix}-7&-24\\24&-7\end{pmatrix}.
+\]
+Maka
+\[
+ U^2e_0=\begin{pmatrix}-7/25\\24/25\end{pmatrix},\qquad
+ p_0=\frac{49}{625},\quad p_1=\frac{576}{625}.
+\]
+Pemeriksaan normalisasi: $49/625+576/625=1$.
+\par\medskip
+Sebaliknya,
+\[
+ U^TUe_0=Ie_0=e_0,\qquad (p_0,p_1)=(1,0).
+\]
+Dua kali rotasi yang sama berbeda dari rotasi yang diikuti inversnya.
+
+\end{frame}
+
+\begin{frame}{Lampiran C: pembahasan latihan 3}
+
+\[
+ VA_0e_0=\begin{pmatrix}3/5\\4/5\end{pmatrix},\qquad
+ VA_1e_0=\begin{pmatrix}-4/5\\3/5\end{pmatrix}.
+\]
+\[
+ \Pr(k=1\mid x=0)=\frac{16}{25},\qquad
+ \Pr(k=1\mid x=1)=\frac9{25}.
+\]
+\begin{itemize}
+\item Kedua peluang tidak nol. Satu hasil 1 tidak menentukan masukan secara pasti.
+\item Pengulangan menghasilkan informasi statistik untuk membedakan kedua distribusi.
+\item Probabilitas masukan bersyarat pada hasil, $\Pr(x\mid k)$, berbeda dari $\Pr(k\mid x)$ dan memerlukan informasi prior jika hendak dihitung.
+\end{itemize}
+\textbf{Inti konsep:} memasukkan informasi ke dalam operasi tidak menjamin bahwa satu pengukuran tertentu langsung mengungkap seluruh informasi masukan.
+
+\end{frame}
+
+\begin{frame}{Lampiran D: ketelitian istilah geometri dan pengukuran}
+
+\textbf{Vektor satuan dan keadaan fisik.}\par
+Untuk perhitungan, gunakan vektor bernorma satu. Dua vektor yang berbeda hanya oleh fase global, $a$ dan $e^{i\gamma}a$, merepresentasikan keadaan fisik yang sama.
+\par\medskip
+\textbf{Bola satuan dan ruang proyektif.}\par
+Keduanya berkaitan, tetapi tidak identik sebagai himpunan. Ruang keadaan murni diperoleh dengan mengidentifikasi vektor-vektor satuan yang hanya berbeda fase global. Rincian ini tidak diperlukan untuk contoh utama.
+\par\medskip
+\textbf{Proyeksi dan pengukuran.}\par
+Komponen $a_ke_k$ belum tentu bernorma satu. Jika hasil pengukuran lengkap adalah $k$, keadaan bersyarat dinormalisasi kembali dan ekuivalen dengan $e_k$. Panjang komponen sebelum normalisasi menentukan probabilitas.
+\par\medskip
+\small Catatan ini memperjelas bahasa geometris pada Subbab 1.2--1.3. Tidak perlu diajarkan sebagai teori baru pada pertemuan pertama.
+
+\end{frame}
+
+\begin{frame}{Lampiran E: probabilitas tidak menyimpan tanda amplitudo}
+\small
+
+\textcolor{teal}{\small Pengayaan opsional, penghubung ke pembahasan berikutnya}
+\[
+ a=\frac1{\sqrt2}\begin{pmatrix}1\\1\end{pmatrix},\qquad
+ b=\frac1{\sqrt2}\begin{pmatrix}1\\-1\end{pmatrix}.
+\]
+Keduanya menghasilkan distribusi $(1/2,1/2)$ jika langsung diukur.
+Namun, untuk matriks uniter
+\[
+ W=\frac1{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix},
+\]
+berlaku
+\[
+ Wa=e_0,\qquad Wb=e_1.
+\]
+\textbf{Kesimpulan:} distribusi hasil langsung belum menggambarkan seluruh informasi keadaan. Tanda dan fase amplitudo dapat memengaruhi hasil setelah operasi selanjutnya.
+\par\medskip
+\small Contoh ini merupakan pengayaan, bukan materi eksplisit Bab 1. Tidak diperlukan untuk menyelesaikan latihan utama.
+
 \end{frame}
 
 \end{document}
